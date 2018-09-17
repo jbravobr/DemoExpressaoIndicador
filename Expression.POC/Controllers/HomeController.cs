@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Expression.POC.Models;
+using DynamicExpresso;
 
 namespace Expression.POC.Controllers
 {
@@ -13,6 +14,26 @@ namespace Expression.POC.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Testar(string expr)
+        {
+            if (string.IsNullOrEmpty(expr))
+                throw new ArgumentNullException(nameof(expr));
+
+            var target = new Interpreter();
+
+            try
+            {
+                var info = target.Eval(expr);
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public IActionResult About()
