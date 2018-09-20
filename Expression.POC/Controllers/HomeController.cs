@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Expression.POC.Models;
 using DynamicExpresso;
+using System.Globalization;
 
 namespace Expression.POC.Controllers
 {
@@ -26,7 +27,7 @@ namespace Expression.POC.Controllers
 
             try
             {
-                var info = target.Eval(expr);
+                var info = target.Eval(expr, CultureInfo.GetCultureInfo("it-IT"));
 
                 return View();
             }
